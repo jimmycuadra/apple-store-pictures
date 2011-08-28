@@ -13,11 +13,13 @@ gem 'uglifier'
 # javascript
 gem 'jquery-rails'
 
+# database
 gem 'pg', :group => [:production]
 gem 'sqlite3', :group => [:development, :test]
 
-# testing
+# development and testing
 group :development, :test do
+  gem 'foreman'
   gem 'rspec-rails', '~> 2.6.1'
   gem 'guard-rspec'
   gem 'rb-fsevent'
