@@ -67,7 +67,13 @@ class StoreManager
   end
 
   def create
-    puts "stores:create is not yet implemented."
+    @stores.each do |name, data|
+      unless Store.where(:name => name).exists?
+        print "Creating record for #{name}..."
+        Store.create!(:name => name, :address => data["address"], :latitude => data["latitude"], :longitude => data["longitude"])
+        puts " done."
+      end
+    end
   end
 
   private

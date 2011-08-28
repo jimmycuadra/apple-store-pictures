@@ -12,7 +12,7 @@ namespace :stores do
   end
 
   desc "Create records for missing stores"
-  task :create do
+  task :create => :environment do
     StoreManager.new.create
   end
 end
