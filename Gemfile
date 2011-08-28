@@ -21,6 +21,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.6.1'
   gem 'guard-rspec'
   gem 'rb-fsevent'
-  gem 'growl'
+  gem 'growl_notify'
   gem 'simplecov'
 end
