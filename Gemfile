@@ -17,6 +17,10 @@ gem 'jquery-rails'
 gem 'pg', :group => [:production]
 gem 'sqlite3', :group => [:development, :test]
 
+# scraping
+gem 'nokogiri'
+gem 'rest-client'
+
 # development and testing
 group :development, :test do
   gem 'foreman'
