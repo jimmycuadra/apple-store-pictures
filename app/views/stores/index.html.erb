@@ -6,8 +6,22 @@
 
 <script type="text/x-jquery-tmpl" id="tmpl">
   <div>
-    <span>${name}</span><br />
-    <span>${address}</span>
+    <p>
+      <strong>${name}</strong><br />
+      <span>${address}</span>
+    </p>
+
+    {{if picture}}
+      <img src="${picture}" alt="${name}" />
+    {{else}}
+      <form data-id="${id}">
+        <label>
+          Image URL:
+          <input type="text" />
+        </label>
+        <button type="submit">Add</button>
+      </form>
+    {{/if}}
   </div>
 </script>
 
@@ -16,5 +30,5 @@
     "use strict";
 
     window.DRQ.bootstrap(<%= @stores.to_json.html_safe %>);
-  })();
+  });
 </script>
