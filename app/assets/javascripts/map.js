@@ -1,5 +1,5 @@
 $(function () {
-  var map, stores;
+  var map, infoWindow, stores;
 
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: new google.maps.LatLng(34.0522222, -118.2427778),
@@ -7,17 +7,22 @@ $(function () {
     zoom: 10
   });
 
+  infoWindow = new google.maps.InfoWindow();
+
   this.DRQ = {
     bootstrap: function (data) {
       stores = data;
 
       stores.forEach(function (store) {
-        store.latlng = new google.maps.LatLng(store.latitude, store.longitude);
-
-        new google.maps.Marker({
-          position: store.latlng,
+        store.marker = new google.maps.Marker({
+          position: new google.maps.LatLng(store.latitude, store.longitude),
           title: store.name,
           map: map
+        });
+
+        google.maps.event.addListener(store.marker, 'click', function () {
+          infoWindow.setContent(store.name);
+          infoWindow.open(map, store.marker);
         });
       });
     }
