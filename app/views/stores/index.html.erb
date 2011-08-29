@@ -12,7 +12,8 @@
     </p>
 
     {{if picture}}
-      <img src="${picture}" alt="${name}" />
+      <a href="${picture}" target="_blank"><img src="${picture}" alt="${name}" class="store-thumbnail" /></a><br />
+      <button data-id="${id}" class="remove-picture">Remove picture</button>
     {{else}}
       <form data-id="${id}">
         <input type="hidden" name="_method" value="put" />

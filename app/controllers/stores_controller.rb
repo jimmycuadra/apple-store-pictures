@@ -11,4 +11,10 @@ class StoresController < ApplicationController
       render :json => @store.errors, :status => :unprocessable_entity
     end
   end
+
+  def remove_picture
+    @store = Store.find(params[:id])
+    @store.update_attribute(:picture, nil)
+    head :accepted
+  end
 end

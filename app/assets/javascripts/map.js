@@ -1,4 +1,5 @@
-/*globals $, google */
+/*globals $, google, _ */
+//= require underscore
 //= require jquery.tmpl
 
 $(function () {
@@ -27,24 +28,54 @@ $(function () {
           map: map
         });
 
-        google.maps.event.addListener(store.marker, 'click', function () {
-          infoWindow.setContent($.tmpl(tmpl, store)[0]);
-          infoWindow.open(map, store.marker);
-        });
+        store.marker.store = store;
+
+        google.maps.event.addListener(store.marker, 'click', DRQ.renderInfoWindow);
       });
     },
 
-    saveImage: function (evt) {
+    renderInfoWindow: function () {
+      infoWindow.setContent($.tmpl(tmpl, this.store)[0]);
+      infoWindow.open(map, this);
+    },
+
+    savePicture: function (evt) {
       var $form = $(evt.target),
           id = $form.data('id');
 
       evt.preventDefault();
 
-      $.post("/stores/" + id, $form.serialize(), function () {
-        console.log(arguments);
+      $.post("/stores/" + id, $form.serialize(), function (updatedStore) {
+        infoWindow.close();
+
+        stores = _(stores).map(function(store) {
+          if (store.id === updatedStore.id) {
+            return $.extend(store, updatedStore);
+          } else {
+            return store;
+          }
+        });
       }, "json");
+    },
+
+    removePicture: function (evt) {
+      var id = parseInt($(evt.target).data('id'));
+
+      $.post("/stores/" + id + "/remove_picture", {
+        _method: "put",
+      }, function () {
+        infoWindow.close();
+
+        stores = _(stores).map(function(store) {
+          if (store.id === id) {
+            store.picture = null;
+          }
+
+          return store;
+        });
+      });
     }
   };
 
-  $('#map-canvas').delegate('form', 'submit', DRQ.saveImage);
+  $('#map-canvas').delegate('form', 'submit', DRQ.savePicture).delegate('.remove-picture', 'click', DRQ.removePicture);
 });
