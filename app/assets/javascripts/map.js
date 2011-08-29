@@ -1,5 +1,10 @@
+/*globals $, google */
+//= require jquery.tmpl
+
 $(function () {
-  var map, infoWindow, stores;
+  "use strict";
+
+  var map, infoWindow, tmpl, stores;
 
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: new google.maps.LatLng(34.0522222, -118.2427778),
@@ -9,7 +14,9 @@ $(function () {
 
   infoWindow = new google.maps.InfoWindow();
 
-  this.DRQ = {
+  tmpl = $('#tmpl').template();
+
+  window.DRQ = {
     bootstrap: function (data) {
       stores = data;
 
@@ -21,10 +28,10 @@ $(function () {
         });
 
         google.maps.event.addListener(store.marker, 'click', function () {
-          infoWindow.setContent(store.name);
+          infoWindow.setContent($.tmpl(tmpl, store)[0]);
           infoWindow.open(map, store.marker);
         });
       });
     }
   };
-})(this);
+})();

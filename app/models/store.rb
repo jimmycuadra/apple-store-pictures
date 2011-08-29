@@ -4,6 +4,7 @@ class Store < ActiveRecord::Base
   def as_json(options = {})
     {
       :name => self.name,
+      :address => self.address,
       :latitude => self.latitude,
       :longitude => self.longitude,
       :picture => self.picture

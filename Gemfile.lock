@@ -53,6 +53,7 @@ GEM
     jquery-rails (1.0.13)
       railties (~> 3.0)
       thor (~> 0.14)
+    jquery-tmpl-rails (0.0.1)
     mail (2.3.0)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -141,6 +142,7 @@ DEPENDENCIES
   growl_notify
   guard-rspec
   jquery-rails
+  jquery-tmpl-rails
   nokogiri
   pg
   rails (= 3.1.0.rc6)

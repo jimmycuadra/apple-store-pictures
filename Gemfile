@@ -12,6 +12,7 @@ gem 'uglifier'
 
 # javascript
 gem 'jquery-rails'
+gem 'jquery-tmpl-rails'
 
 # database
 gem 'pg', :group => [:production]

@@ -3,8 +3,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <%= javascript_include_tag "map" %>
+
+<script type="text/x-jquery-tmpl" id="tmpl">
+  <div>
+    <span>${name}</span><br />
+    <span>${address}</span>
+  </div>
+</script>
+
 <script>
   $(function () {
-    this.DRQ.bootstrap(<%= @stores.to_json.html_safe %>);
-  })(this);
+    "use strict";
+
+    window.DRQ.bootstrap(<%= @stores.to_json.html_safe %>);
+  })();
 </script>
