@@ -58,6 +58,8 @@ class StoreManager
             raise response["status"]
           end
         end
+
+        sleep 1
       else
         puts "Geo information for #{name} already known."
       end
