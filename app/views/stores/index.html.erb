@@ -13,8 +13,10 @@
 
     {{if picture}}
       <a href="${picture}" target="_blank"><img src="${picture}" alt="${name}" class="store-thumbnail" /></a><br />
-      <button data-id="${id}" class="remove-picture">Remove picture</button>
-    {{else}}
+      {{if $item.logged_in}}
+        <button data-id="${id}" class="remove-picture">Remove picture</button>
+      {{/if}}
+    {{else $item.logged_in}}
       <form data-id="${id}">
         <input type="hidden" name="_method" value="put" />
         <label>
@@ -24,6 +26,14 @@
         <button type="submit">Add</button>
       </form>
     {{/if}}
+
+    <div class="login-logout">
+      {{if $item.logged_in}}
+        <a href="/logout">Log out</a>
+      {{else}}
+        <a href="/login">Log in to add or remove pictures</a>
+      {{/if}}
+    </div>
   </div>
 </script>
 
@@ -31,6 +41,6 @@
   $(function () {
     "use strict";
 
-    window.DRQ.bootstrap(<%= @stores.to_json.html_safe %>);
+    window.DRQ.bootstrap(<%= session[:logged_in].to_json %>, <%= @stores.to_json.html_safe %>);
   });
 </script>

@@ -5,7 +5,7 @@
 $(function () {
   "use strict";
 
-  var map, infoWindow, tmpl, stores;
+  var map, infoWindow, tmpl, stores, logged_in;
 
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: new google.maps.LatLng(34.0522222, -118.2427778),
@@ -18,7 +18,8 @@ $(function () {
   tmpl = $('#tmpl').template();
 
   window.DRQ = {
-    bootstrap: function (data) {
+    bootstrap: function (login_status, data) {
+      logged_in = login_status;
       stores = data;
 
       stores.forEach(function (store) {
@@ -35,7 +36,7 @@ $(function () {
     },
 
     renderInfoWindow: function () {
-      infoWindow.setContent($.tmpl(tmpl, this.store)[0]);
+      infoWindow.setContent($.tmpl(tmpl, this.store, { logged_in: logged_in })[0]);
       infoWindow.open(map, this);
     },
 

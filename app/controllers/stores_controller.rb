@@ -1,4 +1,6 @@
 class StoresController < ApplicationController
+  before_filter :authorize!, :except => :index
+
   def index
     @stores = Store.all
   end
