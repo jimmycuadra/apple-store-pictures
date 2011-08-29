@@ -15,9 +15,10 @@
       <img src="${picture}" alt="${name}" />
     {{else}}
       <form data-id="${id}">
+        <input type="hidden" name="_method" value="put" />
         <label>
           Image URL:
-          <input type="text" />
+          <input type="text" name="store[picture]" />
         </label>
         <button type="submit">Add</button>
       </form>

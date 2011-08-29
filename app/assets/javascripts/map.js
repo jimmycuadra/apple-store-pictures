@@ -32,6 +32,19 @@ $(function () {
           infoWindow.open(map, store.marker);
         });
       });
+    },
+
+    saveImage: function (evt) {
+      var $form = $(evt.target),
+          id = $form.data('id');
+
+      evt.preventDefault();
+
+      $.post("/stores/" + id, $form.serialize(), function () {
+        console.log(arguments);
+      }, "json");
     }
   };
+
+  $('#map-canvas').delegate('form', 'submit', DRQ.saveImage);
 });
